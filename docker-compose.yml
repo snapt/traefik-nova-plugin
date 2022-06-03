@@ -11,7 +11,7 @@ services:
       - --api.insecure=true
       - --pilot.token=$TRAEFIK_PILOT_TOKEN
       - --experimental.plugins.traefik-nova-plugin.modulename=github.com/snapt/traefik-nova-plugin
-      - --experimental.plugins.traefik-nova-plugin.version=v1.0.1
+      - --experimental.plugins.traefik-nova-plugin.version=v1.0.2
       - --providers.docker=true
       - --entrypoints.http.address=:80
     volumes:
