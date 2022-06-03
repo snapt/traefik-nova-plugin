@@ -56,7 +56,7 @@ func (a *Nova) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	// in the request.
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		a.logger.Printf("fail to read incoming request: %s", err.Error())
+		a.logger.Printf("Failed to read incoming request: %s", err.Error())
 		http.Error(rw, "", http.StatusBadGateway)
 		return
 	}
@@ -74,7 +74,7 @@ func (a *Nova) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	proxyReq.Host = req.Host
 
 	if err != nil {
-		a.logger.Printf("fail to prepare forwarded request: %s", err.Error())
+		a.logger.Printf("Failed to prepare forwarded request: %s", err.Error())
 		http.Error(rw, "", http.StatusBadGateway)
 		return
 	}
@@ -88,7 +88,7 @@ func (a *Nova) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 
 	resp, err := httpClient.Do(proxyReq)
 	if err != nil {
-		a.logger.Printf("fail to send HTTP request to Nova: %s", err.Error())
+		a.logger.Printf("Failed to send HTTP request to Nova (is it running?): %s", err.Error())
 		http.Error(rw, "", http.StatusBadGateway)
 		return
 	}
