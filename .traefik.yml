@@ -3,7 +3,7 @@ type: middleware
 
 import: github.com/snapt/traefik-nova-plugin
 
-summary: 'Traefik plugin to proxy requests to the Snapt Nova WAAP/WAF, providing L7 security.'
+summary: 'Traefik plugin to proxy requests to the Snapt Nova WAAP/WAF, providing L7 security. Nova's powerful Active Threat System (ATS) quickly identifies and stops bots, scrapers, data leaks, spammers, SQL injections, XSS attacks, denial of service, and much more.'
 
 testData:
   novaContainerUrl: http://nova:80
