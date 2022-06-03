@@ -6,7 +6,7 @@ Traefik plugin to proxy requests to Snapt Nova for evaluation against the WAF.
 
 ## Usage (docker-compose.yml)
 
-See [docker-compose.yml](docker-compose.yml)
+See [docker-compose.yml](docker-compose.yml) for configuration.
 
 1. Set up a Nova Traefik ADC with WAF enabled at https://nova.snapt.net
 2. Get the AutoJoin key from https://nova.snapt.net/adcs/auto-join/keys
