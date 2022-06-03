@@ -22,7 +22,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.traefik.loadbalancer.server.port=8080
-      - traefik.http.middlewares.waf.plugin.traefik-nova-plugin.novaContainerUrl=http://nova:80
+      - traefik.http.middlewares.nova.plugin.traefik-nova-plugin.novaContainerUrl=http://nova:80
 
   # The nova container references in the novaContainerUrl above
   nova: 
@@ -33,6 +33,7 @@ services:
      - NODE_HOST=poll.nova-adc.com
 
   # your actual website traffic is routing to
+  # in this demo it's for /website
   website:
     depends_on:
       - nova
