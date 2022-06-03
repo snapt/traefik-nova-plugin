@@ -46,7 +46,7 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 }
 
 func (a *Nova) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	// Websockets not supported
+	// Websocket scanning is not supported
 	if isWebsocket(req) {
 		a.next.ServeHTTP(rw, req)
 		return
