@@ -1,9 +1,9 @@
-displayName: Snapt Nova Plugin
+displayName: Snapt Nova WAF
 type: middleware
 
 import: github.com/snapt/traefik-nova-plugin
 
-summary: 'Traefik plugin to proxy requests to the Snapt Nova WAF'
+summary: 'Traefik plugin to proxy requests to the Snapt Nova WAAP/WAF, providing L7 security.'
 
 testData:
   novaContainerUrl: http://nova:80
