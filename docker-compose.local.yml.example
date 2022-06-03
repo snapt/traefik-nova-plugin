@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: traefik
+    ports:
+      - "8000:80"
+      - "8080:8080"
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --pilot.token="ENTER_PILOT_TOKEN"
+      - --experimental.localPlugins.traefik-nova-plugin.moduleName=github.com/snapt/traefik-nova-plugin
+      - --providers.docker=true
+      - --entrypoints.http.address=:80
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '.:/plugins-local/src/github.com/snapt/traefik-nova-plugin'
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.middlewares.nova.plugin.traefik-nova-plugin.novaContainerUrl=http://nova:80
+
+  # The nova container references in the novaContainerUrl above
+  nova: 
+    image: novaadc/nova-client:latest
+    environment:
+     - NOVA_AUTO_CONF=ENTER_NOVA_AUTO_CONF
+     - NOVA_AUTO_CONF_HOST=nova.snapt.net
+     - NODE_HOST=poll.nova-adc.com
+
+  # your actual website traffic is routing to
+  website:
+    depends_on:
+      - nova
+    image: containous/whoami
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.website.rule=PathPrefix(`/website`)
+      - traefik.http.routers.website.middlewares=nova@docker

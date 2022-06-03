@@ -1,0 +1,12 @@
+displayName: Snapt Nova Plugin
+type: middleware
+
+import: github.com/snapt/traefik-nova-plugin
+
+summary: 'Traefik plugin to proxy requests to the Snapt Nova WAF'
+
+testData:
+  novaContainerUrl: http://nova:80
+
+iconPath: ./img/icon.png
+bannerPath: ./img/banner.png
