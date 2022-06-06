@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nova
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nova: nova
+  template:
+    metadata:
+      labels:
+        nova: nova
+    spec:
+      containers:
+      - name: nova
+        image: novaadc/nova-client:latest
+        env:
+        - name: NOVA_AUTO_CONF
+          value: "REPLACE_ME_PLEASE"
+        - name: NOVA_AUTO_CONF_HOST
+          value: nova.snapt.net
+        - name: NODE_HOST
+          value: poll.nova-adc.com
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nova-waf
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    nova: nova
+  ports:
+  - port: 80
+    targetPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: whoami
+        image: containous/whoami
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-svc
+  namespace: default
+spec:
+  clusterIP: None
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: web
+
+---    
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: nova
+spec:
+  plugin:
+    traefik-nova-plugin:
+      novaContainerUrl: http://nova-waf:80
+
+---
+
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: whoami-ingress
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: default-nova@kubernetescrd
+    
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /whoami
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami-svc
+                port:
+                  number: 80
+
