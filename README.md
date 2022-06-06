@@ -7,12 +7,12 @@ Traefik plugin to proxy requests to Snapt Nova for evaluation against the WAF.
 
 ## Usage (Kubernetes)
 
-See [examples/k8s](https://github.com/snapt/traefik-nova-plugin/examples/k8s) for a full 
+See [examples/k8s](https://github.com/snapt/traefik-nova-plugin/tree/main/examples/k8s) for a full 
 Kubernetes installation guide.
 
 ## Usage (docker-compose)
 
-See [examples/docker](https://github.com/snapt/traefik-nova-plugin/examples/docker) for a full 
+See [examples/docker](https://github.com/snapt/traefik-nova-plugin/tree/main/examples/docker) for a full 
 docker-compose installation guide.
 
 
