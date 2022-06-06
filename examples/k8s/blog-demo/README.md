@@ -59,7 +59,7 @@ $ kubectl edit deployment.v1.apps/traefik
 ```yaml
 --pilot.token=YOUR_PILOT_TOKEN
 --experimental.plugins.traefik-nova-plugin.modulename=github.com/snapt/traefik-nova-plugin
---experimental.plugins.traefik-nova-plugin.version=v1.0.13
+--experimental.plugins.traefik-nova-plugin.version=v1.1.1
 ```
 
 If you are going to be using a public cloud Kubernetes we recommend also adding: 
