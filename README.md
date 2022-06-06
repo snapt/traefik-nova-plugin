@@ -4,7 +4,33 @@
 
 Traefik plugin to proxy requests to Snapt Nova for evaluation against the WAF. 
 
-## What does Nova WAF provide you?
+
+
+## Usage (Kubernetes)
+
+See [examples/k8s](https://github.com/snapt/traefik-nova-plugin/examples/k8s) for a full 
+Kubernetes installation guide.
+
+## Usage (docker-compose)
+
+See [examples/docker](https://github.com/snapt/traefik-nova-plugin/examples/docker) for a full 
+docker-compose installation guide.
+
+
+
+## How it works
+
+This adds a middleware plugin to Traefik which proxies requests to a Nova container before 
+sending them to your backend. If Nova determines the request should be blocked 
+then it returns a block, otherwise it allows Traefik to continue as it would have.
+
+This requires an AutoJoin key from a Traefik-based ADC you have already added 
+on Nova (https://nova.snapt.net) and, naturally, requires that you enable the 
+WAF. You can use learning mode on Nova to see what would be blocked. 
+
+
+
+## About Nova
 
 Nova is a powerful Layer 7 WAF/WAAP.
 
@@ -33,32 +59,4 @@ More than just TCP data, Nova monitors request rates, HTTP error rates, HTTP POS
 #### Machine Learning and AI
 
 Nova's ML engine profiles your ADCs and the servers behind them, constructing a pattern of "normal" behavior to identify anomalies. Nova's powerful Active Threat System (ATS) quickly identifies and stops attackers.
-
-## Usage (Kubernetes)
-
-Coming soon.
-
-## Usage (docker-compose.yml)
-
-We have included a docker-compose.yml file primarily for testing purposes. Typically, 
-Nova is deployed in a Kubernetes environment with Traefik.
-
-See [docker-compose.yml](docker-compose.yml) for configuration.
-
-1. Set up a Nova Traefik ADC with WAF enabled at https://nova.snapt.net
-2. Get the AutoJoin key from https://nova.snapt.net/adcs/auto-join/keys
-3. Configure your docker-compose.yml or set your environment variables
-4. docker-compose up
-5. Go to http://localhost:8000/website, you see your request details
-6. Go to http://localhost:8000/website?test=/etc/passwd, the request is blocked if Nova's WAF is enabled
-
-## How it works
-
-This adds a middleware plugin to Traefik which proxies requests to a Nova container before 
-sending them to your backend. If Nova determines the request should be blocked 
-then it returns a block, otherwise it allows Traefik to continue as it would have.
-
-This requires an AutoJoin key from a Traefik-based ADC you have already added 
-on Nova (https://nova.snapt.net) and, naturally, requires that you enable the 
-WAF. You can use learning mode on Nova to see what would be blocked. 
 

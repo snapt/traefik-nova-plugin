@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nova
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      nova: nova
+  template:
+    metadata:
+      labels:
+        nova: nova
+    spec:
+      containers:
+      - name: nova
+        image: novaadc/nova-client:latest
+        env:
+        - name: NOVA_AUTO_CONF
+          value: "ENTER_AUTO_CONF_KEY"
+        - name: NOVA_AUTO_CONF_HOST
+          value: nova.snapt.net
+        - name: NODE_HOST
+          value: poll.nova-adc.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nova-waf
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    nova: nova
+  ports:
+  - port: 80
+    targetPort: 80
+
