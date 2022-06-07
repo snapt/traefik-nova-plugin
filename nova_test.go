@@ -39,29 +39,29 @@ func TestNova_ServeHTTP(t *testing.T) {
 		expectStatus    int
 	}{
 		{
-			name:    "Forward request when WAF found no threats",
+			name:    "Forwards request when WAF does not find threats",
 			request: *req,
 			wafResponse: response{
 				StatusCode: 200,
-				Body:       "Response from waf",
+				Body:       "Response from WAF",
 			},
 			serviceResponse: serviceResponse,
 			expectBody:      "Response from service",
 			expectStatus:    200,
 		},
 		{
-			name:    "Intercepts request when WAF found threats",
+			name:    "Intercepts request when WAF does find threats",
 			request: *req,
 			wafResponse: response{
 				StatusCode: 403,
-				Body:       "Response from waf",
+				Body:       "Response from WAF",
 			},
 			serviceResponse: serviceResponse,
-			expectBody:      "Response from waf",
+			expectBody:      "Response from WAF",
 			expectStatus:    403,
 		},
 		{
-			name: "Does not forward Websockets",
+			name: "Does not forward Websockets to WAF (unsupported)",
 			request: http.Request{
 				Body: http.NoBody,
 				Header: http.Header{
@@ -70,7 +70,7 @@ func TestNova_ServeHTTP(t *testing.T) {
 			},
 			wafResponse: response{
 				StatusCode: 200,
-				Body:       "Response from waf",
+				Body:       "Response from WAF",
 			},
 			serviceResponse: serviceResponse,
 			expectBody:      "Response from service",
