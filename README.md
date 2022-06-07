@@ -4,6 +4,8 @@
 
 Traefik plugin to proxy requests to Snapt Nova for evaluation against the WAF. 
 
+## Documentation
+See the [Nova Traefik documentation](https://nova-docs.snapt.net/guide_traefik.html) page.
 
 ## Usage (Kubernetes)
 

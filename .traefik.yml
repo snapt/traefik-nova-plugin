@@ -6,7 +6,7 @@ import: github.com/snapt/traefik-nova-plugin
 summary: 'Traefik plugin to proxy requests to the Snapt Nova WAAP/WAF: identify and stop bots, spammers, SQL injections, XSS attacks, DoS, and more.'
 
 testData:
-  novaContainerUrl: http://nova:80
+  novaContainerUrl: http://nova-waf:80
 
 iconPath: ./img/icon.png
 bannerPath: ./img/banner.png
