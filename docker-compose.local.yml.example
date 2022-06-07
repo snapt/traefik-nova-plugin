@@ -13,7 +13,7 @@ services:
     command:
       - --api.dashboard=true
       - --api.insecure=true
-      - --pilot.token="f80670cf-9fca-4e3e-8cf1-d38e794133fa"
+      - --pilot.token="YOUR_PILOT_TOKEN"
       - --experimental.localPlugins.traefik-nova-plugin.moduleName=github.com/snapt/traefik-nova-plugin
       - --providers.docker=true
       - --entrypoints.http.address=:80
@@ -29,7 +29,7 @@ services:
   nova: 
     image: novaadc/nova-client:latest
     environment:
-     - NOVA_AUTO_CONF=eyJpdiI6InhWVnVydVYyKzkvS1dyQVlLaGxkaVE9PSIsInZhbHVlIjoiSGQ0RzNidHA0Sm8veEN5SjJ4RzlZWW13UTBzSE9ldGpvUEZBdnpYZ1cya1NUQzdTa3VqNG4zWTJmZ3B6L0RmbDFyL0YyZXBWNnhQczQxQldKbS9nYTlIVkhLb1BvMDBndDlCK3V2Sko1RWZZaUpHSllDVmYwaS9MUTlGbXI3cndlVmE5NDRNbzh1VzcyMGFHN21KS0l3eFFYaWdPMGtJcHNGMEFPTWJCeGI1cWxCaDBNZFN0elk3Tm9jNWNOZFNMWnp1ajNFUEl6d3V0WmJYQTYyL0pvSXFCQnlYR09VQ1k3MlNVWEw1b0lycmZDR3E4TEVaTUM0YkFWa3ZwL3ZoUE8zUXViRXBHRDRqamVCbS9QcjBkS3ViSVZVcnpvQW9MdXJpYmM5cmJmMy9PM3kxam4zS0kxZ2hWR1lBK2hJYU9ncFFRMFJCdFdrMXlMN2pNL2VNRHhpUE92MlJsbHdPMFRuZWFZemw1NTRnZ0MzaU8vSFNWRkVhWFRyMXJvR1F1TTdGaWJyWjJGcFI2RWo2OG8xbi9rcjdkbmpLZW5sNGZwWU1WWW1hM3dac1F5WVRqRnR1QUhIT3pxYnNOWEg0eGx5WkZLUWpicG11Z2NVcXJsS0lhVDFoUzZIQ0Ntdmh5dW1qMzhLUURkem5FcDFQWHBUZG5lQ0c1RldCRDZCaEpERUpRN3JXRUExcmZYZUpucVJyUUN6M2pYdXhMVHBnU21QVlpMdzdiTUROUXRNTjJLTEwvdGt5VmpiQi9GZDBrVEtvK1B6UjRRU2hrYmZuNllsSzd1NWdQTFcyYTZLdWhIYzJkVEVNV1lsc2xITTBpd3d3SFhyb3hRODlKR2x3RTl5aTZWNnU5ZGxFT0wxRWk0Rk1pOTB4N0VyamsyQ3M1dkFoWmJEUUsxMEhHbDJxTG85TkZ1OUJNUHN1Z3o3K2FIRG1ZMEJhck5uTmtDbUswdXhXc1FRPT0iLCJtYWMiOiJmYjQ2M2JhZWI3ZTMzMGRkZjYxODJhZWE0YmRmNzJkYTUzYjlkOTliN2UxZWRjYjY5YTdjNzg2MWZlYTY1YjMxIiwidGFnIjoiIn0=
+     - NOVA_AUTO_CONF=YOUR_AUTO_JOIN_KEY
      - NOVA_AUTO_CONF_HOST=nova.snapt.net
      - NODE_HOST=poll.nova-adc.com
 
